@@ -24,12 +24,9 @@ public class GameManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
-            Application.Quit();
+            length = 0;
         }
-        else if (Input.GetKeyDown(KeyCode.Escape))
-        {
-
-        }
+        
     }
 }
 
