@@ -1,34 +1,51 @@
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 public class CarController : MonoBehaviour
 {
-    Vector2 startPos;
+    Vector2 startPos;   //현재 마우스 좌표
     float moveSpeed = 0f;
     public bool isClicked = false;
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(1);
+        }
+
         if (Input.GetMouseButtonDown(0) && isClicked.Equals(false))
         {
             startPos = Input.mousePosition;
         }
         else if (Input.GetMouseButtonUp(0) && isClicked.Equals(false))
-        {
+        {   
+            // 마우스 버튼에서 손가락을 때었을떄 좌표
             Vector2 endPos = Input.mousePosition;
 
+            //스와이프 된 거리 구하기
             float swipeLength = endPos.x - startPos.x;
             
+           
             float swipelength = Mathf.Clamp(swipeLength, 0, 1000f);
 
+             //스와이프 길이를 처음 속도로 변경 500으로 나누는 이유는 씨발 존나 빨라 
             moveSpeed = swipeLength / 500f;
 
+            //효과음을 재생한다.
             GetComponent<AudioSource>().Play();
             isClicked = true;
         }
 
-        transform.Translate(moveSpeed, 0, 0);
-        moveSpeed *= 0.98f;
+        transform.Translate(moveSpeed, 0, 0);   //이동
+        moveSpeed *= 0.98f; //감속
+
+        if(transform.position.x == 0f)
+        {
+            moveSpeed = 0.998f;
+        }
     }
 }
 

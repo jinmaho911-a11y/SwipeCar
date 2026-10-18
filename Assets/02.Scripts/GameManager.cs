@@ -14,18 +14,16 @@ public class GameManager : MonoBehaviour
     {
         float length = flag.transform.position.x - car.transform.position.x;
 
+        
         if (length >= 0)
         {
-            distance_text.text = "목표 지점까지 " + length.ToString("F3") + "m";
+            distance_text.text = "목표 지점까지 " + length.ToString("F6") + "m";
         }
         else
         {
             distance_text.text = "게임 오버 예~";
         }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            length = 0;
-        }
+       
         
     }
 }
