@@ -42,9 +42,9 @@ public class CarController : MonoBehaviour
         transform.Translate(moveSpeed, 0, 0);   //이동
         moveSpeed *= 0.98f; //감속
 
-        if(transform.position.x == 0f)
+        if(transform.position.x <= 0f)
         {
-            moveSpeed = 0.998f;
+            moveSpeed *= 0.998f;
         }
     }
 }
